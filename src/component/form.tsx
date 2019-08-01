@@ -3,7 +3,7 @@ import { useState } from 'react'
 import uuid from 'uuid'
 
 interface Props {
-  onSubmit: (todo: ToDo) => void
+  handleSubmitInForm: (todo: ToDo) => void
 }
 
 export function Form(props: Props) {
@@ -16,7 +16,7 @@ export function Form(props: Props) {
 
   const onSubmit = (event: any) => {
     event.preventDefault();
-    props.onSubmit(new ToDo(value));
+    props.handleSubmitInForm(new ToDo(value));
     setValue(initial);
   };
 

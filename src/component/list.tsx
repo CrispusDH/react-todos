@@ -2,23 +2,31 @@ import React, { useState } from 'react';
 import { Form, ToDo } from './form';
 import { Item } from './item';
 
+export enum FilterOptions {
+  All,
+  Active,
+  Completed
+}
+
 export function List() {
   const [todos, setToDos] = useState<ToDo[]>([]);
   const [filter, setFilter] = useState<FilterOptions>(FilterOptions.All);
 
-  const onSubmit = (todo: ToDo) => {
-    setToDos([todo, ...todos]);
+  const handleLineThrough = () => {
+    setToDos([...todos]);
   };
 
-  const onClick = () => {
-    setToDos([...todos]);
+  const handleDeleteToDo = (id: string) => {
+    setToDos(todos.filter((todo) => {
+      return todo.id !== id;
+    }));
   };
 
   const show = (todos: ToDo[]) => {
     const list = todos.map((todo) => {
-      return Item({ todo, filter, handleDeleteToDo})
+      return Item({ todo, filter, handleDeleteToDo, handleLineThrough})
     });
-    return <ul onClick={onClick}>{list}</ul>;
+    return <ul>{list}</ul>;
   };
 
   const left = () => {
@@ -44,15 +52,13 @@ export function List() {
     return array;
   };
 
-  const handleDeleteToDo = (id: string) => {
-    setToDos(todos.filter((todo) => {
-      return todo.id !== id;
-    }));
+  const handleSubmitInForm = (todo: ToDo) => {
+    setToDos([todo, ...todos]);
   };
 
   return (
     <div>
-      <Form onSubmit={onSubmit}/>
+      <Form handleSubmitInForm={handleSubmitInForm}/>
       {show(filtered())}
       <label>todos left: {left()}</label>
       <div>
@@ -62,10 +68,4 @@ export function List() {
       </div>
     </div>
   )
-}
-
-export enum FilterOptions {
-  All,
-  Active,
-  Completed
 }

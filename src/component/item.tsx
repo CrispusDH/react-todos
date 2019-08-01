@@ -5,7 +5,8 @@ import { FilterOptions } from './list';
 interface Props {
   todo: ToDo,
   filter: FilterOptions,
-  handleDeleteToDo: (id: string) => void
+  handleDeleteToDo: (id: string) => void,
+  handleLineThrough: () => void
 }
 
 export function Item(props: Props) {
@@ -17,7 +18,10 @@ export function Item(props: Props) {
         textDecorationLine: props.todo.isComplete && props.filter !== FilterOptions.Completed ? 'line-through' : ''
       }}
       key={props.todo.id}
-      onClick={() => props.todo.toggleComplete()}
+      onClick={() => {
+        props.todo.toggleComplete();
+        props.handleLineThrough();
+      }}
     >{props.todo.text}
     <button onClick={(event) => {
       event.stopPropagation();
