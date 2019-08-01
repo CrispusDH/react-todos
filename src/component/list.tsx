@@ -34,22 +34,17 @@ export function List() {
   };
 
   const filtered = () => {
-    let array: ToDo[] = [];
     switch (filter) {
       case FilterOptions.All: {
-        array = todos;
-        break;
+        return todos;
       }
       case FilterOptions.Active: {
-        array = todos.filter((todo) => !todo.isComplete);
-        break;
+        return todos.filter((todo) => !todo.isComplete);
       }
       case FilterOptions.Completed: {
-        array = todos.filter((todo) => todo.isComplete);
-        break;
+        return todos.filter((todo) => todo.isComplete);
       }
     }
-    return array;
   };
 
   const handleSubmitInForm = (todo: ToDo) => {
