@@ -1,6 +1,6 @@
 import { List } from './component/list'
 import { Headline } from './component/headline';
-import * as React from 'react'
+import React from 'react'
 
 export function Root() {
   return (
