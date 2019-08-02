@@ -47,6 +47,10 @@ export function List() {
     }
   };
 
+  const handleRemoveCompleted = () => {
+    setToDos(todos.filter((todo) => !todo.isComplete));
+  };
+
   const handleSubmitInForm = (todo: ToDo) => {
     setToDos([todo, ...todos]);
   };
@@ -60,6 +64,9 @@ export function List() {
         <button onClick={() => setFilter(FilterOptions.All)}>all</button>
         <button onClick={() => setFilter(FilterOptions.Active)}>active</button>
         <button onClick={() => setFilter(FilterOptions.Completed)}>completed</button>
+      </div>
+      <div>
+        <button onClick={() => handleRemoveCompleted()}>remove all completed todos</button>
       </div>
     </div>
   )
