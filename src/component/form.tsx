@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import uuid from 'uuid'
+import { TextField, Fab } from '@material-ui/core'
 
 interface Props {
   handleSubmitInForm: (todo: ToDo) => void
@@ -8,31 +9,56 @@ interface Props {
 
 export function Form(props: Props) {
   const initial = '';
-  const [value, setValue] = useState(initial);
+  const [value, setValue] = useState<string>(initial);
+  const [isError, setError] = useState<boolean>(false);
+  const [helperText, setHelperText] = useState<string>(initial);
 
-  const onChange = (event: any) => {
+  const handleChange = (event: any) => {
+    if (isError) {
+      setError(false);
+      setHelperText(initial);
+    }
     setValue(event.target.value)
   };
 
-  const onSubmit = (event: any) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
-    props.handleSubmitInForm(new ToDo(value));
-    setValue(initial);
+    if (isValid()) {
+      props.handleSubmitInForm(new ToDo(value));
+      setValue(initial);
+    } else {
+      setError(true);
+      setHelperText('ToDo should not be empty');
+    }
+  };
+
+  const isValid = () => {
+    return value.trim().length !== 0
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        onChange={onChange}
+    <form onSubmit={handleSubmit}>
+      <TextField
+        onChange={handleChange}
         value={value}
         type="text"
         placeholder="What needs to be done"
-        id="form"
+        id="text-field"
         autoFocus={true}
+        error={isError}
+        helperText={helperText}
       />
-      <button onClick={onSubmit}>
-        add todo
-      </button>
+      <Fab
+        onClick={handleSubmit}
+        color='primary'
+        variant='round'
+        size='small'
+        style={{
+          marginLeft: 15
+        }}
+      >
+        +
+      </Fab>
     </form>
   )
 }
