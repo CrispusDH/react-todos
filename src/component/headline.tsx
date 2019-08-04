@@ -4,10 +4,10 @@ interface Props {
   value: string;
 }
 
-export function Headline({value}: Props) {
+export function Headline(props: Props) {
   return (
     <h1>
-      {value}
+      {props.value}
     </h1>
   )
 }
