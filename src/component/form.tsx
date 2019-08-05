@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import uuid from 'uuid'
 import { TextField, Fab } from '@material-ui/core'
 
@@ -16,10 +15,13 @@ export function Form(props: Props) {
   const handleChange = (event: any) => {
     if (isError) {
       setError(false);
-      setHelperText(initial);
     }
     setValue(event.target.value)
   };
+
+  useEffect(() => {
+    isError ? setHelperText('ToDo should not be empty') : setHelperText(initial);
+  }, [isError]);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -28,7 +30,6 @@ export function Form(props: Props) {
       setValue(initial);
     } else {
       setError(true);
-      setHelperText('ToDo should not be empty');
     }
   };
 
@@ -41,6 +42,7 @@ export function Form(props: Props) {
       <TextField
         onChange={handleChange}
         value={value}
+        name="text"
         type="text"
         placeholder="What needs to be done"
         id="text-field"

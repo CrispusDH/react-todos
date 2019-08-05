@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, ToDo } from './form';
 import { Item } from './item';
 import { List as MaterialList, ButtonGroup, Button, InputLabel } from "@material-ui/core";
@@ -10,8 +10,17 @@ export enum FilterOptions {
 }
 
 export function List() {
-  const [todos, setToDos] = useState<ToDo[]>([]);
+  const initialToDo = () => {
+    const array: ToDo[] = JSON.parse(`${localStorage.getItem('todos')}`);
+    return array || [];
+  };
+
+  const [todos, setToDos] = useState<ToDo[]>(initialToDo());
   const [filter, setFilter] = useState<FilterOptions>(FilterOptions.All);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const handleLineThrough = () => {
     setToDos([...todos]);
