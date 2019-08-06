@@ -5,13 +5,13 @@ import { IconButton, ListItemText } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 interface Props {
-  todo: ToDo,
-  filter: FilterOptions,
-  handleDeleteToDo: (id: string) => void,
-  handleLineThrough: () => void
+  todo: ToDo;
+  filter: FilterOptions;
+  handleDeleteToDo: (id: string) => void;
+  handleLineThrough: () => void;
 }
 
-export function Item(props: Props) {
+export function Item(props: Props): JSX.Element {
   return (
     <ListItemText
       style={{
@@ -20,18 +20,18 @@ export function Item(props: Props) {
         textDecorationLine: props.todo.isComplete && props.filter !== FilterOptions.Completed ? 'line-through' : ''
       }}
       key={props.todo.id}
-      onClick={() => {
+      onClick={(): void => {
         props.todo.toggleComplete();
         props.handleLineThrough();
       }}
     >{props.todo.text}
-    <IconButton
-      onClick={(event) => {
-      event.stopPropagation();
-      props.handleDeleteToDo(props.todo.id)
-    }}>
-      <DeleteIcon fontSize='small'/>
-    </IconButton>
+      <IconButton
+        onClick={(event): void => {
+          event.stopPropagation();
+          props.handleDeleteToDo(props.todo.id)
+        }}>
+        <DeleteIcon fontSize='small'/>
+      </IconButton>
     </ListItemText>
   )
 }
