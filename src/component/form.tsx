@@ -28,16 +28,16 @@ export function Form(props: Props): JSX.Element {
   const [isError, setError] = useState<boolean>(false);
   const [helperText, setHelperText] = useState<string>(initial);
 
-  const handleChange = (event: any): void => {
+  useEffect((): void => {
     if (isError) {
       setError(false);
+      setHelperText(initial)
     }
+  }, [value]);
+
+  const handleChange = (event: any): void => {
     setValue(event.currentTarget.value);
   };
-
-  useEffect((): void => {
-    isError ? setHelperText('ToDo should not be empty') : setHelperText(initial);
-  }, [isError]);
 
   const isValid = (): boolean => {
     return value.trim().length !== 0
@@ -50,6 +50,7 @@ export function Form(props: Props): JSX.Element {
       setValue(initial);
     } else {
       setError(true);
+      setHelperText('ToDo should not be empty')
     }
   };
 
