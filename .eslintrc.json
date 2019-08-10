@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["react", "@typescript-eslint", "typescript"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "@typescript-eslint/indent": ["error", 2]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "globals":  {
+    "window": false
+  },
+  "parser": "@typescript-eslint/parser"
+}

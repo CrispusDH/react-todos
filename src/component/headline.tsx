@@ -4,7 +4,7 @@ interface Props {
   value: string;
 }
 
-export function Headline(props: Props) {
+export function Headline(props: Props): JSX.Element {
   return (
     <h1>
       {props.value}

@@ -1,29 +1,49 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
 import uuid from 'uuid'
 import { TextField, Fab } from '@material-ui/core'
 
-interface Props {
-  handleSubmitInForm: (todo: ToDo) => void
+export class ToDo {
+  public readonly text: string;
+  public readonly id: string;
+  public isComplete: boolean;
+
+  public constructor(text: string) {
+    this.text = text;
+    this.id = uuid();
+    this.isComplete = false;
+  }
+
+  public toggleComplete(): void {
+    this.isComplete = !this.isComplete;
+  }
 }
 
-export function Form(props: Props) {
+interface Props {
+  handleSubmitInForm: (todo: ToDo) => void;
+}
+
+export function Form(props: Props): JSX.Element {
   const initial = '';
   const [value, setValue] = useState<string>(initial);
   const [isError, setError] = useState<boolean>(false);
   const [helperText, setHelperText] = useState<string>(initial);
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: any): void => {
     if (isError) {
       setError(false);
     }
-    setValue(event.target.value)
+    setValue(event.currentTarget.value);
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     isError ? setHelperText('ToDo should not be empty') : setHelperText(initial);
   }, [isError]);
 
-  const handleSubmit = (event: any) => {
+  const isValid = (): boolean => {
+    return value.trim().length !== 0
+  };
+
+  const handleSubmit = (event: any): void => {
     event.preventDefault();
     if (isValid()) {
       props.handleSubmitInForm(new ToDo(value));
@@ -31,10 +51,6 @@ export function Form(props: Props) {
     } else {
       setError(true);
     }
-  };
-
-  const isValid = () => {
-    return value.trim().length !== 0
   };
 
   return (
@@ -63,20 +79,4 @@ export function Form(props: Props) {
       </Fab>
     </form>
   )
-}
-
-export class ToDo {
-  public readonly text: string;
-  public readonly id: string;
-  public isComplete: boolean;
-
-  constructor(text: string) {
-    this.text = text;
-    this.id = uuid();
-    this.isComplete = false;
-  }
-
-  toggleComplete() {
-    this.isComplete = !this.isComplete;
-  }
 }

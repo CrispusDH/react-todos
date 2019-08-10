@@ -9,59 +9,59 @@ export enum FilterOptions {
   Completed
 }
 
-export function List() {
-  const initialToDo = () => {
-    const array: ToDo[] = JSON.parse(`${localStorage.getItem('todos')}`);
+export function List(): JSX.Element {
+  const initialToDo = (): ToDo[] => {
+    const array: ToDo[] = JSON.parse(`${window.localStorage.getItem('todos')}`);
     return array || [];
   };
 
   const [todos, setToDos] = useState<ToDo[]>(initialToDo());
   const [filter, setFilter] = useState<FilterOptions>(FilterOptions.All);
 
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
+  useEffect((): void => {
+    window.localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const handleLineThrough = () => {
+  const handleLineThrough = (): void => {
     setToDos([...todos]);
   };
 
-  const handleDeleteToDo = (id: string) => {
-    setToDos(todos.filter((todo) => {
+  const handleDeleteToDo = (id: string): void => {
+    setToDos(todos.filter((todo): boolean => {
       return todo.id !== id;
     }));
   };
 
-  const show = (todos: ToDo[]) => {
-    const list = todos.map((todo) => {
+  const show = (todos: ToDo[]): JSX.Element => {
+    const list = todos.map((todo): JSX.Element => {
       return Item({ todo, filter, handleDeleteToDo, handleLineThrough})
     });
     return <MaterialList>{list}</MaterialList>;
   };
 
-  const left = () => {
-    return todos.filter((todo) => !todo.isComplete).length;
+  const left = (): number => {
+    return todos.filter((todo): boolean => !todo.isComplete).length;
   };
 
-  const filtered = () => {
+  const filtered = (): ToDo[] => {
     switch (filter) {
       case FilterOptions.All: {
         return todos;
       }
       case FilterOptions.Active: {
-        return todos.filter((todo) => !todo.isComplete);
+        return todos.filter((todo): boolean => !todo.isComplete);
       }
       case FilterOptions.Completed: {
-        return todos.filter((todo) => todo.isComplete);
+        return todos.filter((todo): boolean => todo.isComplete);
       }
     }
   };
 
-  const handleRemoveCompleted = () => {
-    setToDos(todos.filter((todo) => !todo.isComplete));
+  const handleRemoveCompleted = (): void => {
+    setToDos(todos.filter((todo): boolean => !todo.isComplete));
   };
 
-  const handleSubmitInForm = (todo: ToDo) => {
+  const handleSubmitInForm = (todo: ToDo): void => {
     setToDos([todo, ...todos]);
   };
 
@@ -71,14 +71,14 @@ export function List() {
       {show(filtered())}
       <InputLabel>todos left: {left()}</InputLabel>
       <ButtonGroup size='small'>
-        <Button onClick={() => setFilter(FilterOptions.All)}>all</Button>
-        <Button onClick={() => setFilter(FilterOptions.Active)}>active</Button>
-        <Button onClick={() => setFilter(FilterOptions.Completed)}>completed</Button>
+        <Button onClick={(): void => setFilter(FilterOptions.All)}>all</Button>
+        <Button onClick={(): void => setFilter(FilterOptions.Active)}>active</Button>
+        <Button onClick={(): void => setFilter(FilterOptions.Completed)}>completed</Button>
       </ButtonGroup>
       <div>
         <Button
           variant="outlined"
-          onClick={() => handleRemoveCompleted()}>remove all completed todos
+          onClick={(): void => handleRemoveCompleted()}>remove all completed todos
         </Button>
       </div>
     </div>
