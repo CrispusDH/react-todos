@@ -7,10 +7,10 @@ export class ToDo {
   public readonly id: string;
   public isComplete: boolean;
 
-  public constructor(text: string) {
+  public constructor(text: string, id = uuid(), isComplete = false) {
     this.text = text;
-    this.id = uuid();
-    this.isComplete = false;
+    this.id = id;
+    this.isComplete = isComplete;
   }
 
   public toggleComplete(): void {

@@ -11,7 +11,8 @@ export enum FilterOptions {
 
 export function List(): JSX.Element {
   const initialToDo = (): ToDo[] => {
-    const array: ToDo[] = JSON.parse(`${window.localStorage.getItem('todos')}`);
+    const raw: [] = JSON.parse(`${window.localStorage.getItem('todos')}`);
+    const array = raw.map(({ text, id, isComplete }): ToDo => new ToDo(text, id, isComplete));
     return array || [];
   };
 
