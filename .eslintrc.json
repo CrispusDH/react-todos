@@ -13,7 +13,8 @@
     }
   },
   "rules": {
-    "@typescript-eslint/indent": ["error", 2]
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/no-use-before-define": ["off"]
   },
   "settings": {
     "react": {

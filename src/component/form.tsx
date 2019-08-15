@@ -2,22 +2,6 @@ import React, { useEffect, useState} from 'react'
 import uuid from 'uuid'
 import { TextField, Fab } from '@material-ui/core'
 
-export class ToDo {
-  public readonly text: string;
-  public readonly id: string;
-  public isComplete: boolean;
-
-  public constructor(text: string, id = uuid(), isComplete = false) {
-    this.text = text;
-    this.id = id;
-    this.isComplete = isComplete;
-  }
-
-  public toggleComplete(): void {
-    this.isComplete = !this.isComplete;
-  }
-}
-
 interface Props {
   handleSubmitInForm: (todo: ToDo) => void;
 }
@@ -80,4 +64,20 @@ export function Form(props: Props): JSX.Element {
       </Fab>
     </form>
   )
+}
+
+export class ToDo {
+  public readonly text: string;
+  public readonly id: string;
+  public isComplete: boolean;
+
+  public constructor(text: string, id = uuid(), isComplete = false) {
+    this.text = text;
+    this.id = id;
+    this.isComplete = isComplete;
+  }
+
+  public toggleComplete(): void {
+    this.isComplete = !this.isComplete;
+  }
 }
