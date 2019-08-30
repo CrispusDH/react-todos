@@ -1,8 +1,6 @@
 import React from 'react';
 import { ToDo } from './form';
 import { FilterOptions } from './list';
-import { IconButton, ListItemText } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 interface Props {
   todo: ToDo;
@@ -13,7 +11,7 @@ interface Props {
 
 export function Item(props: Props): JSX.Element {
   return (
-    <ListItemText
+    <li
       style={{
         display: "flex",
         justifyContent: "start",
@@ -25,13 +23,13 @@ export function Item(props: Props): JSX.Element {
         props.handleLineThrough();
       }}
     >{props.todo.text}
-      <IconButton
-        onClick={(event): void => {
+      <button
+        onClick={(event: any): void => {
           event.stopPropagation();
           props.handleDeleteToDo(props.todo.id)
         }}>
-        <DeleteIcon fontSize='small'/>
-      </IconButton>
-    </ListItemText>
+        X
+      </button>
+    </li>
   )
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState} from 'react'
 import uuid from 'uuid'
-import { TextField, Fab } from '@material-ui/core'
 
 interface Props {
   handleSubmitInForm: (todo: ToDo) => void;
@@ -10,12 +9,10 @@ export function Form(props: Props): JSX.Element {
   const initial = '';
   const [value, setValue] = useState<string>(initial);
   const [isError, setError] = useState<boolean>(false);
-  const [helperText, setHelperText] = useState<string>(initial);
 
   useEffect((): void => {
     if (isError) {
       setError(false);
-      setHelperText(initial)
     }
   }, [value]);
 
@@ -34,13 +31,12 @@ export function Form(props: Props): JSX.Element {
       setValue(initial);
     } else {
       setError(true);
-      setHelperText('ToDo should not be empty')
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField
+      <input
         onChange={handleChange}
         value={value}
         name="text"
@@ -48,20 +44,15 @@ export function Form(props: Props): JSX.Element {
         placeholder="What needs to be done"
         id="text-field"
         autoFocus={true}
-        error={isError}
-        helperText={helperText}
       />
-      <Fab
+      <div
         onClick={handleSubmit}
-        color='primary'
-        variant='round'
-        size='small'
         style={{
           marginLeft: 15
         }}
       >
         +
-      </Fab>
+      </div>
     </form>
   )
 }

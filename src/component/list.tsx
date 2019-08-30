@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form, ToDo } from './form';
 import { Item } from './item';
-import { List as MaterialList, ButtonGroup, Button, InputLabel } from "@material-ui/core";
 
 export enum FilterOptions {
   All,
@@ -37,7 +36,7 @@ export function List(): JSX.Element {
     const list = todos.map((todo): JSX.Element => {
       return Item({ todo, filter, handleDeleteToDo, handleLineThrough})
     });
-    return <MaterialList>{list}</MaterialList>;
+    return <ul>{list}</ul>;
   };
 
   const left = (): number => {
@@ -70,17 +69,16 @@ export function List(): JSX.Element {
     <div>
       <Form handleSubmitInForm={handleSubmitInForm}/>
       {show(filtered())}
-      <InputLabel>todos left: {left()}</InputLabel>
-      <ButtonGroup size='small'>
-        <Button onClick={(): void => setFilter(FilterOptions.All)}>all</Button>
-        <Button onClick={(): void => setFilter(FilterOptions.Active)}>active</Button>
-        <Button onClick={(): void => setFilter(FilterOptions.Completed)}>completed</Button>
-      </ButtonGroup>
+      <label>todos left: {left()}</label>
       <div>
-        <Button
-          variant="outlined"
+        <button onClick={(): void => setFilter(FilterOptions.All)}>all</button>
+        <button onClick={(): void => setFilter(FilterOptions.Active)}>active</button>
+        <button onClick={(): void => setFilter(FilterOptions.Completed)}>completed</button>
+      </div>
+      <div>
+        <button
           onClick={(): void => handleRemoveCompleted()}>remove all completed todos
-        </Button>
+        </button>
       </div>
     </div>
   )
