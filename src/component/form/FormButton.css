@@ -1,0 +1,17 @@
+.FormButton {
+    color: #f6b93b;
+    background: #ffffff;
+    padding: 10px 15px;
+    border: 2px solid #f6b93b;
+    transition: color 0.4s;
+    font-size: 24px;
+    cursor: pointer;
+    outline: 0;
+}
+
+.FormButton:hover {
+    color: #ffffff;
+    background-color: #f6b93b;
+    border-color: #f6b93b;
+    transition: color 0.4s;
+}

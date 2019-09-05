@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToDo } from './form';
+import { ToDo } from './form/form';
 import { FilterOptions } from './list';
 
 interface Props {

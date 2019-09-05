@@ -1,4 +1,6 @@
 import React, { useEffect, useState} from 'react'
+import './FormButton.css'
+import './FormInput.css'
 import uuid from 'uuid'
 
 interface Props {
@@ -44,15 +46,14 @@ export function Form(props: Props): JSX.Element {
         placeholder="What needs to be done"
         id="text-field"
         autoFocus={true}
+        className="FormInput"
       />
-      <div
+      <button
         onClick={handleSubmit}
-        style={{
-          marginLeft: 15
-        }}
+        className="FormButton"
       >
         +
-      </div>
+      </button>
     </form>
   )
 }

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './Headline.css';
 
 interface Props {
   value: string;
@@ -6,7 +7,9 @@ interface Props {
 
 export function Headline(props: Props): JSX.Element {
   return (
-    <h1>
+    <h1
+      className="Headline"
+    >
       {props.value}
     </h1>
   )
