@@ -1,6 +1,6 @@
 import React from 'react'
-import { List } from './component/list'
-import { Headline } from './component/headline/headline';
+import { List } from './components/List'
+import { Headline } from './components/Headline';
 
 export function Root(): JSX.Element {
   return (

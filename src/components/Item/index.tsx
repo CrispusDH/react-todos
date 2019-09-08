@@ -1,6 +1,6 @@
 import React from 'react';
-import { ToDo } from './form/form';
-import { FilterOptions } from './list';
+import { ToDo } from '../Form';
+import { FilterOptions } from '../List';
 
 interface Props {
   todo: ToDo;

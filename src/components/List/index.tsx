@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Form, ToDo } from './form/form';
-import { Item } from './item';
+import { Item } from '../Item';
+import { Form, ToDo } from '../Form';
 
 export enum FilterOptions {
   All,
