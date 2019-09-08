@@ -9,7 +9,7 @@ interface Props {
   handleLineThrough: () => void;
 }
 
-export function Item(props: Props): JSX.Element {
+export const Item: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <li
       style={{
@@ -32,4 +32,4 @@ export function Item(props: Props): JSX.Element {
       </button>
     </li>
   )
-}
+};

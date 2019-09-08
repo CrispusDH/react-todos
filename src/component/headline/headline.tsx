@@ -5,7 +5,7 @@ interface Props {
   value: string;
 }
 
-export function Headline(props: Props): JSX.Element {
+export const Headline: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <h1
       className="Headline"
@@ -13,4 +13,4 @@ export function Headline(props: Props): JSX.Element {
       {props.value}
     </h1>
   )
-}
+};

@@ -7,7 +7,7 @@ interface Props {
   handleSubmitInForm: (todo: ToDo) => void;
 }
 
-export function Form(props: Props): JSX.Element {
+export const Form: React.FC<Props> = (props: Props): JSX.Element => {
   const initial = '';
   const [value, setValue] = useState<string>(initial);
   const [isError, setError] = useState<boolean>(false);
@@ -56,7 +56,7 @@ export function Form(props: Props): JSX.Element {
       </button>
     </form>
   )
-}
+};
 
 export class ToDo {
   public readonly text: string;
