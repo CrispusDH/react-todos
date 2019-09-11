@@ -7,6 +7,9 @@ interface Props {
   handleSubmitInForm: (todo: ToDo) => void;
 }
 
+type submitEvent = React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>;
+type changeEvent = React.ChangeEvent<HTMLInputElement>;
+
 export const Form: React.FC<Props> = (props: Props): JSX.Element => {
   const initial = '';
   const [value, setValue] = useState<string>(initial);
@@ -18,7 +21,7 @@ export const Form: React.FC<Props> = (props: Props): JSX.Element => {
     }
   }, [value]);
 
-  const handleChange = (event: any): void => {
+  const handleChange = (event: changeEvent): void => {
     setValue(event.currentTarget.value);
   };
 
@@ -26,7 +29,7 @@ export const Form: React.FC<Props> = (props: Props): JSX.Element => {
     return value.trim().length !== 0
   };
 
-  const handleSubmit = (event: any): void => {
+  const handleSubmit = (event: submitEvent): void => {
     event.preventDefault();
     if (isValid()) {
       props.handleSubmitInForm(new ToDo(value));

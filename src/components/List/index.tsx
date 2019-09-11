@@ -77,9 +77,9 @@ export const List: React.FC = (): JSX.Element => {
       </div>
       <div>
         <button
-          onClick={(): void => handleRemoveCompleted()}>remove all completed todos
+          onClick={handleRemoveCompleted}>remove all completed todos
         </button>
       </div>
     </div>
   )
-}
+};
