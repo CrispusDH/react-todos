@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Form, ToDo } from './form';
-import { Item } from './item';
+import { Item } from '../Item';
+import { Form, ToDo } from '../Form';
 
 export enum FilterOptions {
   All,
@@ -8,7 +8,7 @@ export enum FilterOptions {
   Completed
 }
 
-export function List(): JSX.Element {
+export const List: React.FC = (): JSX.Element => {
   const initialToDo = (): ToDo[] => {
     const raw: [] = JSON.parse(`${window.localStorage.getItem('todos')}`);
     const array = raw.map(({ text, id, isComplete }): ToDo => new ToDo(text, id, isComplete));
@@ -33,7 +33,7 @@ export function List(): JSX.Element {
   };
 
   const show = (todos: ToDo[]): JSX.Element => {
-    const list = todos.map((todo): JSX.Element => {
+    const list = todos.map((todo) => {
       return Item({ todo, filter, handleDeleteToDo, handleLineThrough})
     });
     return <ul>{list}</ul>;
@@ -77,9 +77,9 @@ export function List(): JSX.Element {
       </div>
       <div>
         <button
-          onClick={(): void => handleRemoveCompleted()}>remove all completed todos
+          onClick={handleRemoveCompleted}>remove all completed todos
         </button>
       </div>
     </div>
   )
-}
+};

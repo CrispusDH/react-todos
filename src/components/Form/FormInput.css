@@ -1,0 +1,16 @@
+.FormInput {
+    padding: 10px 15px;
+    font-size: large;
+    box-sizing: border-box;
+    border: 2px solid #f6b93b;
+    color: #f6b93b;
+    transition: color 0.4s;
+}
+
+.FormInput:focus {
+    outline: 0;
+}
+
+.FormInput::placeholder {
+    color: #f6b93b;
+}

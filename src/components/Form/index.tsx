@@ -1,11 +1,16 @@
 import React, { useEffect, useState} from 'react'
+import './FormButton.css'
+import './FormInput.css'
 import uuid from 'uuid'
 
 interface Props {
   handleSubmitInForm: (todo: ToDo) => void;
 }
 
-export function Form(props: Props): JSX.Element {
+type submitEvent = React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>;
+type changeEvent = React.ChangeEvent<HTMLInputElement>;
+
+export const Form: React.FC<Props> = (props: Props): JSX.Element => {
   const initial = '';
   const [value, setValue] = useState<string>(initial);
   const [isError, setError] = useState<boolean>(false);
@@ -16,7 +21,7 @@ export function Form(props: Props): JSX.Element {
     }
   }, [value]);
 
-  const handleChange = (event: any): void => {
+  const handleChange = (event: changeEvent): void => {
     setValue(event.currentTarget.value);
   };
 
@@ -24,7 +29,7 @@ export function Form(props: Props): JSX.Element {
     return value.trim().length !== 0
   };
 
-  const handleSubmit = (event: any): void => {
+  const handleSubmit = (event: submitEvent): void => {
     event.preventDefault();
     if (isValid()) {
       props.handleSubmitInForm(new ToDo(value));
@@ -44,18 +49,17 @@ export function Form(props: Props): JSX.Element {
         placeholder="What needs to be done"
         id="text-field"
         autoFocus={true}
+        className="FormInput"
       />
-      <div
+      <button
         onClick={handleSubmit}
-        style={{
-          marginLeft: 15
-        }}
+        className="FormButton"
       >
         +
-      </div>
+      </button>
     </form>
   )
-}
+};
 
 export class ToDo {
   public readonly text: string;
