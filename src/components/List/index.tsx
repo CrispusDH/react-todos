@@ -11,7 +11,7 @@ export enum FilterOptions {
 export const List: React.FC = (): JSX.Element => {
   const initialToDo = (): ToDo[] => {
     const raw: [] = JSON.parse(`${window.localStorage.getItem('todos')}`);
-    const array = raw.map(({ text, id, isComplete }): ToDo => new ToDo(text, id, isComplete));
+    const array = raw?.map(({ text, id, isComplete }): ToDo => new ToDo(text, id, isComplete));
     return array || [];
   };
 

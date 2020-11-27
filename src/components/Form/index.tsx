@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import './FormButton.css'
 import './FormInput.css'
-import uuid from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
   handleSubmitInForm: (todo: ToDo) => void;
@@ -62,11 +62,7 @@ export const Form: React.FC<Props> = (props: Props): JSX.Element => {
 };
 
 export class ToDo {
-  public readonly text: string;
-  public readonly id: string;
-  public isComplete: boolean;
-
-  public constructor(text: string, id = uuid(), isComplete = false) {
+  public constructor(public readonly text: string, public readonly id = uuidv4(), public isComplete = false) {
     this.text = text;
     this.id = id;
     this.isComplete = isComplete;
